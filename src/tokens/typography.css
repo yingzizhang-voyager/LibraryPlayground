@@ -1,0 +1,63 @@
+/*
+ * Typography — 1:1 with Figma local text styles in
+ * "02 • Hai Flow Web UI" (fileKey: awlKskuON6SMUJv0i4jhYs).
+ *
+ * Sizes + line-heights are expressed in **rem** so the entire type scale
+ * (and Tailwind's `text-{name}` utilities derived from it) rescales with
+ * the root font-size — useful for browser zoom and a11y font preferences.
+ * Conversion baseline: 1rem = 16px.
+ *
+ * Each `--text-{name}` is paired with `--text-{name}--line-height` so
+ * Tailwind v4 emits a single `text-{name}` utility setting BOTH font-size
+ * and line-height.
+ *
+ *   Figma style           → utility           px (at 16px base)
+ *   32pt Hero             → text-hero         32 / auto
+ *   27pt Large Title      → text-large-title  27 / 32
+ *   24pt Page title       → text-page-title   24 / 32
+ *   18pt Section title    → text-section-title 18 / 28
+ *   16pt Larger body      → text-larger-body  16 / 24
+ *   14pt Body             → text-body         14 / 20
+ *   12pt Caption          → text-caption      12 / 16
+ *   11pt Tiny             → text-tiny         11 / 16
+ *   10pt Chart            → text-chart        10 / 16
+ */
+@theme static {
+  /* Families */
+  --font-sans: "GT America", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Courier New", monospace;
+
+  /* Weights (unit-less) */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+
+  /* Size × line-height pairs (all rem) */
+  --text-hero: 2rem;                       /* 32 */
+  --text-hero--line-height: normal;        /* AUTO in Figma */
+
+  --text-large-title: 1.6875rem;           /* 27 */
+  --text-large-title--line-height: 2rem;   /* 32 */
+
+  --text-page-title: 1.5rem;               /* 24 */
+  --text-page-title--line-height: 2rem;    /* 32 */
+
+  --text-section-title: 1.125rem;          /* 18 */
+  --text-section-title--line-height: 1.75rem; /* 28 */
+
+  --text-larger-body: 1rem;                /* 16 */
+  --text-larger-body--line-height: 1.5rem; /* 24 */
+
+  --text-body: 0.875rem;                   /* 14 */
+  --text-body--line-height: 1.25rem;       /* 20 */
+
+  --text-caption: 0.75rem;                 /* 12 */
+  --text-caption--line-height: 1rem;       /* 16 */
+
+  --text-tiny: 0.6875rem;                  /* 11 */
+  --text-tiny--line-height: 1rem;          /* 16 */
+
+  --text-chart: 0.625rem;                  /* 10 */
+  --text-chart--line-height: 1rem;         /* 16 */
+}

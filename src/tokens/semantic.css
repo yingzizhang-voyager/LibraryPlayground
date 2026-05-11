@@ -1,0 +1,192 @@
+/*
+ * Semantic tokens — 1:1 with the Figma "Semantic" collection.
+ * Each token aliases a primitive via var(), so a single primitive change
+ * propagates to every semantic name.
+ *
+ * Figma name → CSS var name (and Tailwind utility):
+ *   "Colors/Label/primary"           → --color-label-primary       → text-label-primary
+ *   "Colors/Border/border-primary"   → --color-border-primary      → border-border-primary
+ *   "Colors/Error/error-bg"          → --color-error-bg            → bg-error-bg
+ *   "Workflow builder/Action/todo"   → --color-flow-todo           → bg-flow-todo
+ *
+ * Workflow colors include Light mode only here; Dark mode block is at the bottom.
+ */
+@theme static {
+  /* ── Surfaces ───────────────────────────────────────────────── */
+  --color-background: var(--color-travertine-100);
+  --color-white-background: var(--color-white);
+  --color-foreground: var(--color-basalt-400);
+  --color-card: var(--color-travertine-100);
+  --color-card-foreground: var(--color-basalt-400);
+  --color-popover: var(--color-travertine-100);
+  --color-popover-foreground: var(--color-basalt-400);
+  --color-muted: var(--color-travertine-200);
+  --color-muted-foreground: var(--color-basalt-100);
+  --color-primary: var(--color-travertine-200);
+  --color-primary-foreground: var(--color-basalt-400);
+  --color-secondary: var(--color-travertine-250);
+  --color-secondary-foreground: var(--color-basalt-400);
+  --color-accent: var(--color-travertine-300);
+  --color-accent-foreground: var(--color-basalt-400);
+  --color-input: var(--color-travertine-400);
+
+  /* ── Labels (text) ──────────────────────────────────────────── */
+  --color-label-strongest:  var(--color-basalt-700);
+  --color-label-heading:    var(--color-basalt-600);
+  --color-label-heavy:      var(--color-basalt-500);
+  --color-label-primary:    var(--color-basalt-400);
+  --color-label-secondary:  var(--color-basalt-300);
+  --color-label-tertiary:   var(--color-basalt-100);
+  --color-label-quaternary: var(--color-travertine-900);
+
+  /* ── Fills (icons / non-text) ───────────────────────────────── */
+  --color-fill-primary:    var(--color-travertine-900);
+  --color-fill-secondary:  var(--color-travertine-700);
+  --color-fill-tertiary:   var(--color-travertine-500);
+  --color-fill-quaternary: var(--color-travertine-200);
+
+  /* ── Borders ────────────────────────────────────────────────── */
+  --color-border-primary:     var(--color-travertine-800);
+  --color-border-secondary:   var(--color-travertine-600);
+  --color-border-tertiary:    var(--color-travertine-400);
+  --color-border-transparent: var(--color-basalt-tint-100);
+
+  /* ── Status: Success ────────────────────────────────────────── */
+  --color-success:        var(--color-jade-700);
+  --color-success-label:  var(--color-jade-900);
+  --color-success-bg:     var(--color-jade-100);
+  --color-success-ring:   var(--color-jade-200);
+
+  /* ── Status: Warning ────────────────────────────────────────── */
+  --color-warning:        var(--color-butter-500);
+  --color-warning-label:  var(--color-butter-900);
+  --color-warning-bg:     var(--color-butter-50);
+  --color-warning-ring:   var(--color-butter-100);
+
+  /* ── Status: Error ──────────────────────────────────────────── */
+  --color-error:        var(--color-shell-600);
+  --color-error-label:  var(--color-shell-900);
+  --color-error-bg:     var(--color-shell-100);
+  --color-error-ring:   var(--color-shell-200);
+
+  /* ── Accent: Aquamarine ─────────────────────────────────────── */
+  --color-accent-aquamarine:        var(--color-aquamarine-500);
+  --color-accent-aquamarine-label:  var(--color-aquamarine-700);
+  --color-accent-aquamarine-bg:     var(--color-aquamarine-100);
+  --color-accent-aquamarine-border: var(--color-aquamarine-200);
+
+  /* ── Accent: Quartz ─────────────────────────────────────────── */
+  --color-accent-quartz:        var(--color-quartz-500);
+  --color-accent-quartz-label:  var(--color-quartz-600);
+  --color-accent-quartz-bg:     var(--color-quartz-100);
+  --color-accent-quartz-border: var(--color-quartz-200);
+
+  /* ── Brand ──────────────────────────────────────────────────── */
+  --color-brand-glacier:             var(--color-glacier-900);
+  --color-brand-action:              #5682CE;
+  --color-brand-action-disabled:     rgba(86, 130, 206, 0.5);
+  --color-brand-background:          var(--color-glacier-100);
+  --color-brand-card-background:     var(--color-glacier-200);
+  --color-brand-surface:             var(--color-glacier-50);
+  --color-brand-border:              var(--color-glacier-600);
+  --color-button-primary:            var(--color-basalt-400);
+  --color-button-primary-foreground: var(--color-travertine-100);
+
+  /* ── Interaction overlays ───────────────────────────────────── */
+  --color-hover:             var(--color-basalt-tint-50);
+  --color-hover-lightweight: var(--color-basalt-tint-30);
+  --color-hover-dark:        var(--color-travertine-tint-100);
+  --color-press:             var(--color-basalt-tint-100);
+  --color-press-dark:        var(--color-travertine-tint-200);
+  --color-scrim:             var(--color-basalt-tint-200);
+  --color-ring:              var(--color-glacier-400);
+
+  /* ── Workflow / Action (Light mode) ─────────────────────────── */
+  --color-flow-acknowledgement:        #FC8ABB;
+  --color-flow-acknowledgement-label:  #713E54;
+  --color-flow-acknowledgement-bg:     #FFE7F5;
+  --color-flow-acknowledgement-tint:   rgba(252, 138, 187, 0.1);
+
+  --color-flow-approval:        #62CAF9;
+  --color-flow-approval-label:  #2A566A;
+  --color-flow-approval-bg:     #E7F6FF;
+  --color-flow-approval-tint:   rgba(98, 202, 249, 0.1);
+
+  --color-flow-todo:        #8B8AFF;
+  --color-flow-todo-label:  #464580;
+  --color-flow-todo-bg:     #E8E8FE;
+  --color-flow-todo-tint:   rgba(139, 138, 255, 0.1);
+
+  --color-flow-file-request:        #5CBF7F;
+  --color-flow-file-request-label:  #2C5B3C;
+  --color-flow-file-request-bg:     #E9F7ED;
+  --color-flow-file-request-tint:   rgba(92, 191, 127, 0.1);
+
+  --color-flow-esign:        #FF8E8D;
+  --color-flow-esign-label:  #794343;
+  --color-flow-esign-bg:     #FFF0F0;
+  --color-flow-esign-tint:   rgba(255, 142, 141, 0.1);
+
+  --color-flow-form:        #AC7FE4;
+  --color-flow-form-label:  #564072;
+  --color-flow-form-bg:     #EFE4FD;
+  --color-flow-form-tint:   rgba(172, 127, 228, 0.1);
+
+  --color-flow-pdf-form:        #AECC40;
+  --color-flow-pdf-form-label:  #4A571B;
+  --color-flow-pdf-form-bg:     #F4F8E2;
+  --color-flow-pdf-form-tint:   rgba(174, 204, 64, 0.1);
+
+  --color-flow-decision:        #FF8EF0;
+  --color-flow-decision-label:  #73406C;
+  --color-flow-decision-bg:     #FFF3FE;
+  --color-flow-decision-tint:   rgba(255, 142, 240, 0.1);
+
+  --color-flow-questionnaire:        #51B597;
+  --color-flow-questionnaire-label:  #2B5F4F;
+  --color-flow-questionnaire-bg:     #ECFFF9;
+  --color-flow-questionnaire-tint:   rgba(81, 181, 151, 0.1);
+
+  --color-flow-launch-web-app:        #819EFF;
+  --color-flow-launch-web-app-label:  #3D4B79;
+  --color-flow-launch-web-app-bg:     #E9EEFF;
+  --color-flow-launch-web-app-tint:   rgba(129, 158, 255, 0.1);
+
+  --color-flow-time-booking:        #33D3E4;
+  --color-flow-time-booking-label:  #165A61;
+  --color-flow-time-booking-bg:     #E8FDFF;
+  --color-flow-time-booking-tint:   rgba(51, 211, 228, 0.1);
+
+  --color-flow-generic:        var(--color-basalt-100);
+  --color-flow-generic-label:  var(--color-basalt-300);
+  --color-flow-generic-bg:     var(--color-travertine-200);
+  --color-flow-generic-tint:   var(--color-basalt-tint-100);
+
+  --color-flow-automation:        var(--color-glacier-800);
+  --color-flow-automation-label:  var(--color-glacier-900);
+  --color-flow-automation-bg:     var(--color-glacier-100);
+  --color-flow-automation-tint:   rgba(145, 179, 207, 0.1);
+
+  --color-flow-connector: var(--color-basalt-100);
+  --color-flow-milestone: var(--color-travertine-tint-400);
+
+  /* ── Chart palette ──────────────────────────────────────────── */
+  --color-chart-soft-blue:     #7BA6F3;
+  --color-chart-sage:          #B3D4A7;
+  --color-chart-dusty-rose:    #EAA1AE;
+  --color-chart-dark-teal:     #234442;
+  --color-chart-orange:        #FF8942;
+  --color-chart-light-teal:    #8FD2E5;
+  --color-chart-pink:          #EB6B9C;
+  --color-chart-bright-yellow: #FFE47F;
+
+  /* ── Role palette (avatars / categorisation) ────────────────── */
+  --color-role-harbor-mist:  #9FB3C8;
+  --color-role-matcha:       #A8B89A;
+  --color-role-rosewood:     #AFA09B;
+  --color-role-wheat:        #C2B59A;
+  --color-role-seafoam:      #9BAFAB;
+  --color-role-mauve:        #A39BAF;
+  --color-role-peach-clay:   #C9A99A;
+  --color-role-antique-pink: #BFA5A5;
+}

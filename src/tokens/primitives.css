@@ -1,0 +1,144 @@
+/*
+ * Primitives — raw token values, 1:1 with Figma file
+ * "01 • Hai Flow Foundation" (fileKey: WB9fm7ir5f8Lyaim0iEMll).
+ *
+ * Declared in @theme static so:
+ *   1. Every primitive is unconditionally emitted to :root for ad-hoc
+ *      `var(--color-…)` usage (used by the foundation gallery).
+ *   2. Tailwind generates utility classes for each (`bg-basalt-400`,
+ *      `text-shell-700`, etc.) — needed by component hover/active states
+ *      that target specific scale steps.
+ */
+@theme static {
+  /* ── Greys / Basalt ─────────────────────────────────────────── */
+  --color-white: #FFFFFF;
+  --color-basalt-100: #8D8984;
+  --color-basalt-200: #77736F;
+  --color-basalt-300: #595653;
+  --color-basalt-400: #3E3C3A;
+  --color-basalt-500: #33312F;
+  --color-basalt-600: #282624;
+  --color-basalt-700: #22201F;
+  --color-basalt-800: #1B1918;
+
+  /* Basalt tint — translucent dark overlays */
+  --color-basalt-tint-30:  rgba(34, 32, 31, 0.03);
+  --color-basalt-tint-50:  rgba(34, 32, 31, 0.05);
+  --color-basalt-tint-100: rgba(34, 32, 31, 0.10);
+  --color-basalt-tint-200: rgba(34, 32, 31, 0.20);
+  --color-basalt-tint-300: rgba(34, 32, 31, 0.30);
+  --color-basalt-tint-400: rgba(34, 32, 31, 0.40);
+  --color-basalt-tint-500: rgba(34, 32, 31, 0.50);
+  --color-basalt-tint-600: rgba(34, 32, 31, 0.60);
+  --color-basalt-tint-700: rgba(34, 32, 31, 0.70);
+  --color-basalt-tint-800: rgba(34, 32, 31, 0.80);
+  --color-basalt-tint-900: rgba(34, 32, 31, 0.90);
+
+  /* ── Off-whites / Travertine ────────────────────────────────── */
+  --color-travertine-100: #FCFAFA;
+  --color-travertine-200: #F9F8F6;
+  --color-travertine-250: #F6F5F3;
+  --color-travertine-300: #EFEDEA;
+  --color-travertine-400: #EBE8E3;
+  --color-travertine-500: #E6E4E1;
+  --color-travertine-600: #DCD9D4;
+  --color-travertine-700: #D0CDC8;
+  --color-travertine-800: #C5C1BC;
+  --color-travertine-900: #ADA8A1;
+
+  --color-travertine-tint-100: rgba(252, 250, 250, 0.10);
+  --color-travertine-tint-200: rgba(252, 250, 250, 0.20);
+  --color-travertine-tint-300: rgba(252, 250, 250, 0.30);
+  --color-travertine-tint-400: rgba(252, 250, 250, 0.40);
+  --color-travertine-tint-500: rgba(252, 250, 250, 0.50);
+  --color-travertine-tint-600: rgba(252, 250, 250, 0.60);
+  --color-travertine-tint-700: rgba(252, 250, 250, 0.70);
+  --color-travertine-tint-800: rgba(252, 250, 250, 0.80);
+  --color-travertine-tint-900: rgba(252, 250, 250, 0.90);
+
+  /* ── Reds / Shell — error ───────────────────────────────────── */
+  --color-shell-100: #FFF5F6;
+  --color-shell-200: #FBD9D8;
+  --color-shell-300: #E9B6B7;
+  --color-shell-400: #EF9BA4;
+  --color-shell-500: #E57A88;
+  --color-shell-600: #E46074;
+  --color-shell-700: #C94463;
+  --color-shell-800: #9D2D4B;
+  --color-shell-900: #7D1934;
+
+  /* ── Greens / Jade — success ────────────────────────────────── */
+  --color-jade-100: #F6FFFB;
+  --color-jade-150: #DCFCEF;
+  --color-jade-200: #DCFCE1;
+  --color-jade-300: #C7EED0;
+  --color-jade-400: #B3E4C2;
+  --color-jade-500: #81BEA2;
+  --color-jade-600: #65AA89;
+  --color-jade-700: #41926C;
+  --color-jade-800: #20825E;
+  --color-jade-900: #166A54;
+
+  /* ── Yellows / Butter — warning ─────────────────────────────── */
+  --color-butter-50:  #FFFCEA;
+  --color-butter-100: #FFF9D4;
+  --color-butter-200: #FFF7C3;
+  --color-butter-300: #FEECA8;
+  --color-butter-400: #FEDF8E;
+  --color-butter-500: #DBAD6B;
+  --color-butter-600: #CE9B53;
+  --color-butter-700: #AD7C36;
+  --color-butter-900: #744D14;
+
+  /* ── Blues / Glacier — brand ───────────────────────────────── */
+  --color-glacier-50:  #FAFBFF;
+  --color-glacier-100: #F1F7FD;
+  --color-glacier-200: #EAF4FE;
+  --color-glacier-300: #DBECFD;
+  --color-glacier-400: #CFE5FC;
+  --color-glacier-500: #BFD7ED;
+  --color-glacier-600: #ABC7DD;
+  --color-glacier-700: #91B3CF;
+  --color-glacier-800: #6F9DC3;
+  --color-glacier-900: #618AAB;
+
+  /* ── Cyans / Aquamarine — accent ───────────────────────────── */
+  --color-aquamarine-100: #D5EDF7;
+  --color-aquamarine-200: #B8E8FF;
+  --color-aquamarine-300: #ADDBF0;
+  --color-aquamarine-400: #8ACEED;
+  --color-aquamarine-500: #70C2E9;
+  --color-aquamarine-550: #70C2E9;
+  --color-aquamarine-600: #44BEE8;
+  --color-aquamarine-700: #25B0E8;
+
+  /* ── Pinks / Quartz — accent ───────────────────────────────── */
+  --color-quartz-100: #FFF5FD;
+  --color-quartz-200: #FFD7F3;
+  --color-quartz-300: #EFB9DE;
+  --color-quartz-400: #E598CD;
+  --color-quartz-500: #E08BC4;
+  --color-quartz-600: #DB6FAA;
+
+  /* ── Role palette (sequence) ───────────────────────────────── */
+  --color-role-1: #27B7E8;
+  --color-role-2: #567FD8;
+  --color-role-3: #057B76;
+  --color-role-4: #E186C2;
+  --color-role-5: #EA98B1;
+
+  /* ── Icon size scale (rem; scales with root font-size) ─────── */
+  --size-icon-xxs: 0.75rem;   /* 12 */
+  --size-icon-xs:  1rem;      /* 16 */
+  --size-icon-md:  1.25rem;   /* 20 */
+  --size-icon-lg:  1.5rem;    /* 24 */
+
+  /* ── Border radius (PX — physical edges, not affected by zoom) */
+  --radius-none: 0px;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   12px;
+  --radius-2xl:  16px;
+  --radius-full: 9999px;
+}

@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/*
+ * Hai Flow design system tokens
+ * Source:
+ *   colors / radii / sizes  → "01 • Hai Flow Foundation" (WB9fm7ir5f8Lyaim0iEMll)
+ *   typography              → "02 • Hai Flow Web UI"     (awlKskuON6SMUJv0i4jhYs)
+ *
+ * Layered as primitives → semantic → typography. All three populate Tailwind's
+ * @theme so every token doubles as a utility class (e.g. `bg-foreground`,
+ * `text-label-primary`, `border-border-secondary`, `text-body`, `rounded-lg`).
+ */
+@import "./tokens/primitives.css";
+@import "./tokens/semantic.css";
+@import "./tokens/typography.css";
+
+/* ── Base styles ──────────────────────────────────────────────── */
+/*
+ * NB: do NOT set font-size on <html>. Changing the root font-size changes
+ * what 1rem means, and Tailwind's spacing scale is rem-based — overriding
+ * html { font-size } would shrink every h-9 / w-6 / etc. by the same ratio.
+ * Body text size lives on <body> so it inherits to children without
+ * affecting rem-based sizing utilities.
+ */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  color: var(--color-foreground);
+  background: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Inline badge — user / DDR mention rendered inside any editor ─ */
+/*
+ * Used by RichTextEditor.Input and TextArea.Input when their HTML content
+ * contains <span data-badge="user|ddr">…</span> nodes. The CSS handles all
+ * visual variants (colour, error context). Future: editor primitives will
+ * provide programmatic insertion via a picker dropdown.
+ */
+[data-badge],
+[data-chip="true"] /* legacy alias */ {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;            /* 4px */
+  padding: 1px 0.375rem;   /* 1 (px keep, near-invisible offset) / 6 */
+  margin: 0 1px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;    /* 13 */
+  line-height: 1.125rem;   /* 18 */
+  white-space: nowrap;
+  /* default to DDR colours when no type is set */
+  background: color-mix(in srgb, var(--color-brand-glacier) 12%, transparent);
+  color: var(--color-brand-glacier);
+}
+
+[data-badge="user"] {
+  background: color-mix(in srgb, var(--color-flow-acknowledgement) 16%, transparent);
+  color: var(--color-flow-acknowledgement-label);
+}
+
+[data-badge="ddr"] {
+  background: color-mix(in srgb, var(--color-brand-glacier) 12%, transparent);
+  color: var(--color-brand-glacier);
+}
+
+[data-badge]::after,
+[data-chip="true"]::after {
+  content: "×";
+  font-size: 0.75rem;       /* 12 */
+  margin-left: 0.125rem;    /* 2 */
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+[data-error="true"] [data-badge],
+[data-error="true"] [data-chip="true"] {
+  background: color-mix(in srgb, var(--color-error) 12%, transparent);
+  color: var(--color-error);
+}
