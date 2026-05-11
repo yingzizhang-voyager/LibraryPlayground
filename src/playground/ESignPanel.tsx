@@ -4,12 +4,11 @@ import { TextInput } from "../components/TextInput";
 import { RichTextEditor } from "../components/RichTextEditor";
 import { Button } from "../components/Button";
 import { ToggleSwitch } from "../components/ToggleSwitch";
-import { Checkbox } from "../components/Checkbox";
 import { RadioGroup } from "../components/RadioGroup";
-import { SegmentedControl } from "../components/SegmentedControl";
 import { Collapsible } from "../components/Collapsible";
 import { SidePanel } from "../components/SidePanel";
 import { FileUpload } from "../components/FileUpload";
+import { DueDate, DUE_DATE_DEFAULT, type DueDateValue } from "../components/DueDate";
 import {
   AssigneeList,
   type AssigneeItemData,
@@ -41,18 +40,6 @@ function Avatar({ initial, color }: { initial: string; color: string }) {
   );
 }
 
-const DUE_DATE_OPTIONS = [
-  { value: "since-start", label: "Since start" },
-  { value: "on-date",     label: "On date" },
-  { value: "from-field",  label: "From a field" },
-];
-
-const UNIT_OPTIONS: SelectorOption[] = [
-  { value: "day",   label: "day(s)" },
-  { value: "hour",  label: "hour(s)" },
-  { value: "week",  label: "week(s)" },
-];
-
 const ROLE_OPTIONS: SelectorOption[] = [
   { value: "role-1",  label: "Role 1" },
   { value: "role-2",  label: "Role 2" },
@@ -79,18 +66,19 @@ const ASSIGNEE_CATALOG: AssigneeRecord[] = [
 interface ESignPanelProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  inline?: boolean;
 }
 
-export function ESignPanel({ open, onOpenChange }: ESignPanelProps) {
+export function ESignPanel({ open, onOpenChange, inline = false }: ESignPanelProps) {
   const [name, setName] = useState("Lease agreement");
   const [description, setDescription] = useState(
     "Sign your lease agreement electronically to quickly and securely complete the process from anywhere.",
   );
-  const [dueDateOn, setDueDateOn] = useState(true);
-  const [dueDateMode, setDueDateMode] = useState("since-start");
-  const [dueDateValue, setDueDateValue] = useState("1");
-  const [dueDateUnit, setDueDateUnit] = useState("day");
-  const [excludeWeekends, setExcludeWeekends] = useState(false);
+  const [dueDate, setDueDate] = useState<DueDateValue>({
+    ...DUE_DATE_DEFAULT,
+    enabled: true,
+    mode: "since-start",
+  });
   const [sequential, setSequential] = useState(true);
 
   /** Ordered assignees — stored as AssigneeItemData so drag reorder persists. */
@@ -111,7 +99,12 @@ export function ESignPanel({ open, onOpenChange }: ESignPanelProps) {
   const [roles, setRoles] = useState<string[]>(["role-1", "role-2"]);
 
   return (
-    <SidePanel open={open} onOpenChange={onOpenChange}>
+    <SidePanel
+      open={open}
+      onOpenChange={onOpenChange}
+      inline={inline}
+      width={inline ? "100%" : undefined}
+    >
       <SidePanel.Nav
         icon={<EsignIcon />}
         title="E-Sign"
@@ -167,55 +160,14 @@ export function ESignPanel({ open, onOpenChange }: ESignPanelProps) {
             </p>
           </div>
 
-          <div className="flex flex-col gap-3 rounded-lg border border-border-secondary p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-body text-foreground">Due date</span>
-              <ToggleSwitch
-                checked={dueDateOn}
-                onCheckedChange={setDueDateOn}
-                aria-label="Toggle due date"
-              />
-            </div>
-            {dueDateOn && (
-              <>
-                <SegmentedControl value={dueDateMode} onValueChange={setDueDateMode}>
-                  {DUE_DATE_OPTIONS.map((o) => (
-                    <SegmentedControl.Item key={o.value} value={o.value}>
-                      {o.label}
-                    </SegmentedControl.Item>
-                  ))}
-                </SegmentedControl>
-
-                <div className="flex items-center gap-2">
-                  <div className="w-20">
-                    <TextInput.Root value={dueDateValue} onValueChange={setDueDateValue}>
-                      <TextInput.Field>
-                        <TextInput.Input type="number" min={1} />
-                      </TextInput.Field>
-                    </TextInput.Root>
-                  </div>
-                  <div className="w-28">
-                    <Selector.Root value={dueDateUnit} onValueChange={setDueDateUnit}>
-                      <Selector.Field options={UNIT_OPTIONS} />
-                    </Selector.Root>
-                  </div>
-                  <span className="text-body text-label-secondary">after step starts</span>
-                </div>
-
-                <label className="inline-flex items-center gap-2 text-body text-foreground">
-                  <Checkbox checked={excludeWeekends} onCheckedChange={setExcludeWeekends} />
-                  Exclude weekends
-                </label>
-              </>
-            )}
-          </div>
+          <DueDate value={dueDate} onValueChange={setDueDate} />
         </SidePanel.Section>
 
         <SidePanel.SectionDivider />
 
         {/* ─── Section 2 · Assignee selection (multi → list-below) ── */}
         <SidePanel.Section>
-          <h3 className="text-section-title font-regular text-label-heading">Choice</h3>
+          <h3 className="text-larger-body font-regular text-label-heading">Choice</h3>
 
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
@@ -275,7 +227,7 @@ export function ESignPanel({ open, onOpenChange }: ESignPanelProps) {
         <SidePanel.Section>
           <Collapsible defaultOpen>
             <Collapsible.Trigger>
-              <span className="text-section-title font-regular text-label-heading">
+              <span className="text-larger-body font-regular text-label-heading">
                 Advanced settings
               </span>
             </Collapsible.Trigger>

@@ -4,14 +4,14 @@
     {
       "name": "storybook",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "storybook", "--", "--no-open", "--quiet"],
-      "port": 6006
+      "runtimeArgs": ["run", "storybook", "--", "--no-open", "--quiet", "-p", "6288"],
+      "port": 6288
     },
     {
       "name": "vite",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["vite", "--port", "5173"],
-      "port": 5173
+      "runtimeArgs": ["vite", "--port", "5288", "--strictPort"],
+      "port": 5288
     }
   ]
 }
