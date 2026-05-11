@@ -158,11 +158,12 @@ const ASSIGNEE_OPTIONS: SelectorOption[] = [
 interface DecisionPanelProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  inline?: boolean;
 }
 
 let nextId = 1;
 
-export function DecisionPanel({ open, onOpenChange }: DecisionPanelProps) {
+export function DecisionPanel({ open, onOpenChange, inline = false }: DecisionPanelProps) {
   const [name, setName]               = useState("");
   const [description, setDescription] = useState("");
   const [dueDateOn, setDueDateOn]     = useState(false);
@@ -189,7 +190,12 @@ export function DecisionPanel({ open, onOpenChange }: DecisionPanelProps) {
     setChoices((prev) => prev.filter((c) => c.id !== id));
 
   return (
-    <SidePanel open={open} onOpenChange={onOpenChange}>
+    <SidePanel
+      open={open}
+      onOpenChange={onOpenChange}
+      inline={inline}
+      width={inline ? "100%" : undefined}
+    >
       <SidePanel.Nav
         icon={<DecisionIcon />}
         title="Decision"
@@ -245,7 +251,7 @@ export function DecisionPanel({ open, onOpenChange }: DecisionPanelProps) {
         {/* ─── Choice options ──────────────────────────────────── */}
         <SidePanel.Section>
           <div className="flex flex-col gap-1">
-            <h3 className="text-section-title font-regular text-label-heading">Choice</h3>
+            <h3 className="text-larger-body font-regular text-label-heading">Choice</h3>
             <p className="text-body text-label-secondary">
               Add the options assignees choose from. Each can let users continue the flow,
               branch to specific steps.
@@ -284,7 +290,7 @@ export function DecisionPanel({ open, onOpenChange }: DecisionPanelProps) {
 
         {/* ─── Assignees (single) ──────────────────────────────── */}
         <SidePanel.Section>
-          <h3 className="text-section-title font-regular text-label-heading">Choice</h3>
+          <h3 className="text-larger-body font-regular text-label-heading">Choice</h3>
 
           <div className="flex flex-col gap-2">
             <span className="px-1 text-body text-foreground">
@@ -302,7 +308,7 @@ export function DecisionPanel({ open, onOpenChange }: DecisionPanelProps) {
         <SidePanel.Section>
           <Collapsible>
             <Collapsible.Trigger>
-              <span className="text-section-title font-regular text-label-heading">
+              <span className="text-larger-body font-regular text-label-heading">
                 Advanced settings
               </span>
             </Collapsible.Trigger>

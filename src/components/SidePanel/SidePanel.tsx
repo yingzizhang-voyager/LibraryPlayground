@@ -55,12 +55,15 @@ export interface SidePanelProps
   onOpenChange: (open: boolean) => void;
   /** Panel width. Accepts any CSS length. Defaults to `"33.75rem"` (540 at 16px base). */
   width?: number | string;
+  /** When true, render as an embedded card (no backdrop, no scroll lock, no Escape handler, no close-on-outside-click). Useful for split-view playgrounds. */
+  inline?: boolean;
 }
 
 function Root({
   open,
   onOpenChange,
   width = "33.75rem",
+  inline = false,
   className,
   children,
   ...rest
@@ -68,7 +71,7 @@ function Root({
   const close = useCallback(() => onOpenChange(false), [onOpenChange]);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open || inline) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
     };
@@ -79,9 +82,27 @@ function Root({
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [open, close]);
+  }, [open, close, inline]);
 
   if (!open) return null;
+
+  if (inline) {
+    return (
+      <Ctx.Provider value={{ onClose: close }}>
+        <div
+          role="region"
+          style={{ width }}
+          className={cx(
+            "relative flex h-full flex-col bg-white font-sans",
+            className,
+          )}
+          {...rest}
+        >
+          {children}
+        </div>
+      </Ctx.Provider>
+    );
+  }
 
   const onBackdrop = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) close();

@@ -61,9 +61,10 @@ function catalogToItem(id: string): AssigneeItemData {
 interface TodoPanelProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  inline?: boolean;
 }
 
-export function TodoPanel({ open, onOpenChange }: TodoPanelProps) {
+export function TodoPanel({ open, onOpenChange, inline = false }: TodoPanelProps) {
   const [name, setName]               = useState("");
   const [description, setDescription] = useState("");
   const [dueDateOn, setDueDateOn]     = useState(false);
@@ -74,7 +75,12 @@ export function TodoPanel({ open, onOpenChange }: TodoPanelProps) {
   const assigneeIds = assignees.map((a) => a.id);
 
   return (
-    <SidePanel open={open} onOpenChange={onOpenChange}>
+    <SidePanel
+      open={open}
+      onOpenChange={onOpenChange}
+      inline={inline}
+      width={inline ? "100%" : undefined}
+    >
       <SidePanel.Nav icon={<TodoIcon />} title="To-Do" />
 
       <SidePanel.Body>
@@ -119,7 +125,7 @@ export function TodoPanel({ open, onOpenChange }: TodoPanelProps) {
 
         {/* ─── Who needs to do this? ───────────────────────────── */}
         <SidePanel.Section>
-          <h3 className="text-section-title font-regular text-label-heading">
+          <h3 className="text-larger-body font-regular text-label-heading">
             Who needs to do this?
           </h3>
 
@@ -173,7 +179,7 @@ export function TodoPanel({ open, onOpenChange }: TodoPanelProps) {
         <SidePanel.Section>
           <Collapsible>
             <Collapsible.Trigger>
-              <span className="text-section-title font-regular text-label-heading">
+              <span className="text-larger-body font-regular text-label-heading">
                 Advanced settings
               </span>
             </Collapsible.Trigger>
